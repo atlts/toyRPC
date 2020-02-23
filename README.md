@@ -9,6 +9,8 @@
   
   当调用时通过代理的方法，将请求发到服务端之后立刻异步RpcFuture，利用AQS同步器实现类似countDownLatch的功能来等待远程调用结果的返回
   
+  服务器端利用线程池，多线程处理请求
+  
   实现了有callBacks和无callBacks两种异步阻塞调用
   
   
