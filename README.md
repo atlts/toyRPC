@@ -5,7 +5,7 @@
   
   利用Spring依赖注入，管理server，handler等bean
   
-  使用了长连接，并将所有连接放入ConnetcManager中进行管理
+  使用了长连接，并将所有连接放入ConnetcManager中进行集中管理，便于收集需要的handler
   
   当调用时通过代理的方法，将请求发到服务端之后立刻异步RpcFuture，此对象中借鉴了线程池的submit方法，利用AQS同步器实现类似countDownLatch的功能
   
