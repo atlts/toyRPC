@@ -1,4 +1,8 @@
 # nettyForRPC
+  Test for 10 threads,100 requests for each thread
+  Sync call total_time_cost:242ms,req/s=4132.231404958678
+  
+  
   基于TCP数据包的通信以获得更高的效率
   
   使用Netty进行客户端与服务端之间的通信，简化了NIO的复杂的配置和epoll空轮询的问题
@@ -12,5 +16,7 @@
   服务器端利用线程池，多线程处理请求
   
   实现了有callBacks和无callBacks两种异步阻塞调用
+  
+
   
   
