@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 public class RpcServer implements ApplicationContextAware, InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
 
+    private static int threads = 16;
     private String serverAddress;
     private ServiceRegistry serviceRegistry;
     //存储handler
@@ -54,7 +55,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         this.serverAddress = serverAddress;
         this.serviceRegistry = serviceRegistry;
     }
-
+    public void setThreads(int num){
+        threads = num;
+    }
     /**
      *将真正的请求处理器放入handlerMap中
      * @param ctx
@@ -95,7 +98,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         if(threadPoolExecutor == null){
             synchronized (RpcServer.class){
                 if(threadPoolExecutor == null){
-                    threadPoolExecutor = new ThreadPoolExecutor(16,16,600L,
+                    threadPoolExecutor = new ThreadPoolExecutor(threads,threads,600L,
                             TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(65536));
                 }
             }

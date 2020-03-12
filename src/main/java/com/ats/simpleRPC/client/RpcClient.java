@@ -13,14 +13,17 @@ import java.util.concurrent.TimeUnit;
 public class RpcClient {
     private String serverAddress;
     private ServiceDiscovery serviceDiscovery;
-    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(16, 16, 600L,
+    private static int threads = 16;
+    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(threads, threads, 600L,
             TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(65536));
 
 
     public static void submit(Runnable task) {
         threadPoolExecutor.submit(task);
     }
-
+    public static void setThreads(int num){
+        threads = num;
+    }
     public RpcClient(String serverAddress) {
         this.serverAddress = serverAddress;
     }

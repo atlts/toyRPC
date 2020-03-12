@@ -27,9 +27,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectManage {
     private static final Logger logger = LoggerFactory.getLogger(ConnectManage.class);
     private volatile static ConnectManage connectManage;
-
+    private static  int threads = 16;
     private EventLoopGroup eventLoopGroup = new NioEventLoopGroup(4);
-    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(16,16,600L, TimeUnit.SECONDS,
+    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(threads,threads,600L, TimeUnit.SECONDS,
             new ArrayBlockingQueue<Runnable>(65536));
     private CopyOnWriteArrayList<RpcClientHandler>connectedHandlers = new CopyOnWriteArrayList<>();
     private Map<InetSocketAddress,RpcClientHandler>connectedServerNodes = new ConcurrentHashMap<>();
@@ -44,6 +44,9 @@ public class ConnectManage {
 
     }
 
+    public static void setThreads(int num){
+        threads = num;
+    }
     public static ConnectManage getInstance(){
         if(connectManage == null){
             synchronized (ConnectManage.class){

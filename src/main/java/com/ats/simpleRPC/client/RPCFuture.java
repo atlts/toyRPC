@@ -8,10 +8,7 @@ import com.ats.simpleRPC.protocol.RpcResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -22,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class RPCFuture implements Future<Object> {
     private static final Logger logger = LoggerFactory.getLogger(RPCFuture.class);
-
+    public PriorityBlockingQueue<Integer>queue = new PriorityBlockingQueue<>();
     private Sync sync;
     private RpcRequest request;
     private RpcResponse response;
